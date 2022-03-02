@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+    Dog Ups - Meetups
+{% endblock title %}
+
+
+{% block content %}
+
+<section id="meetups">
+    <div class="container">
+        <div class="row g-2 g-lg-3">
+            {% for meetup in meetups %} 
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100 w-100">
+                    <img src="{{ meetup.featured_image.url }}" class="rounded card-img-top" alt="Meetup Image">
+                        <div class="card-body">
+                            <h4 class="card-title">{{meetup.title}}</h4>
+                            <h5 class="card-text">{{meetup.city}}</h5>
+                            <h6 class="card-text">{{meetup.date}} | {{meetup.time}}</h6>
+                            {% for dog_size in meetup.dog_sizes.all %}
+                                <span class="badge bg-secondary">{{dog_size}}</span>
+                            {% endfor %}
+                            <p class="card-text">{{meetup.description|slice:60}} ...</p>
+                            <a href="{% url 'meetup' meetup.id %}" class="btn btn-primary">Check this meetup</a>
+                
+                            {% if request.user.is_authenticated and request.user.profile == meetup.organizer %}
+                                <a href="{% url 'update_meetup' meetup.id %}">Edit</a>
+                                <a href="{% url 'delete_meetup' meetup.id %}">Delete</a>
+                            {% endif %} 
+                        </div>
+                </div>      
+            </div>
+            {% endfor %}                            
+        </div>
+    </div> 
+</section> 
+
+{% endblock content %}

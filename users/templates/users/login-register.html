@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<section id="login-register">
+    <div class="container" style="max-width: fit-content;">
+        <div class="row text-center">
+            <div class="col-md">
+                <div class="card-body rounded text-center">
+                    {% if page == 'register' %}
+                    <span class="text-muted">Sign up</span>
+                    <h3 class="fw-bold mb-5">Create new account</h3>
+                    <form method="POST" action="{% url 'register' %}">
+                        {% csrf_token %}               
+                        {% for field in form %}
+                        <label for="formInput#text">{{field.label}}</label>
+                        {{field}}
+                        {% endfor %}
+                        <br>
+                        <!--Submit-->
+                        <input class="btn btn-primary py-2 w-100" type="submit" value="Sign up"></input>
+                        <!--Alternative-->
+                        <p>Already have an account <a href="{% url 'login' %}">Log in</a></p>
+                    </form>
+                       
+                {% else %}
+                    <span class="text-muted">Log in</span>
+                    <h3 class="fw-bold mb-5">Join our community</h3>    
+                    <form method="POST" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <!--Username-->
+                        <label for="formInput#text">Username</label>
+                        <input class="form-control mb-2" type="text" name="username">
+                        <!--Password-->
+                        <label for="formInput#password">Password</label>
+                        <input class="form-control mb-2" type="password" name="password">
+                        <br>
+                        <!--Submit-->
+                        <button class="btn btn-primary py-2 w-100 mb-4">Get Started</button>
+                        <!--Alternative-->
+                        <p>Don't have an account <a href="{% url 'register' %}">Sign up</a></p>
+                    </form>
+                {% endif %}
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

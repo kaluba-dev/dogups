@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<section id="meetup-details">
+    <div class="container" style="max-width: fit-content;">
+        <div class="row text-center">
+            <div class="col-md">
+                <div class="card-body rounded text-center">
+                    <img src="{{ meetup.featured_image.url }}" class="img-fluid" style="max-height: 500px; max-width: 500px;" alt="Responsive image">
+                    <h1>{{meetup.title}}</h1>
+                    {% if request.user.is_authenticated and request.user.profile == meetup.organizer %}
+                        <a href="{% url 'update_meetup' meetup.id %}">Edit</a>
+                        <a href="{% url 'delete_meetup' meetup.id %}">Delete</a>
+                    {% endif %}
+                    <hr>
+                        <div class="container">
+                            <p>Organizer: <a href="{% url 'user_profile' meetup.organizer.id %}">{{meetup.organizer.username}}</a></p>
+                            <hr>
+                            <p>Date: {{meetup.date}}</p>
+                            <p>Time: {{meetup.time}}</p>
+                            <p>Location: {{meetup.location}}, {{meetup.city}}, {{meetup.country}}</p>
+                        </div>
+                        
+                        <div class="container">
+    
+                            <p>Dog size accepted: 
+                                {% for dog_size in meetup.dog_sizes.all %}
+                                    <span class="badge bg-secondary">{{dog_size}}</span>
+                                {% endfor %}
+                            </p>
+                            <hr>
+
+                            <p>{{meetup.description}}</p>
+                            <hr>
+                        </div>
+
+                        <div class="container">
+                            <p>Participants: </p>
+                            {% for profile in meetup.attendees.all %}
+                                <li>
+                                    <a href="{% url 'user_profile' profile.id %}">{{profile.username}}</a>
+                                </li>
+                            {% endfor %}
+                        </div>
+                        <br>
+                        <div class="container">
+                            {% if request.user.profile not in attendees %}
+                                <a class="btn btn-success" href="{% url 'attend_meetup' meetup.id %}">Attend</a>
+                            {% else %}
+                                <a class="btn btn-danger" href="{% url 'cancel_attending' meetup.id %}">Cancel participation</a>           
+                            {% endif %}
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

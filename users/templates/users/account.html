@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col d-flex justify-content-center">
+    <div class="card" style="width: 25%; background-color:rgb(215, 220, 228)">
+        <img class="card-img-top" src="{{ profile.profile_image.url }}" alt="Card image cap">
+        <div class="card-body text-center">
+            <h2 class="card-title">{{profile.username}}</span></h2>
+            <p class="card-text">Age: {{profile.user_age}}</p>
+            <p class="card-text">Gender: {{profile.user_gender}}</p>
+            <p class="card-text">Location: {{profile.location}}</p>
+            <p class="card-text">Country: {{profile.country}}</p>
+            <p class="card-text">Bio:</p>{{profile.bio}}
+            <br>
+            <br>
+            <a href="{% url 'edit_account' %}" class="btn btn-secondary">Edit</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

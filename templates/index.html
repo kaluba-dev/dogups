@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="pb-5">
+    <div class="container pt-5">
+        <div class="row align-items-center mb-5">
+        <div class="col-12 col-lg-5 mb-5 mb-lg-0 me-auto">
+            <h2 class="display-4 fw-bold mb-5">Find your next <span class="text-warning">dog meetup</span></h2>
+            <p class="lead text-muted mb-5">Meet other dog lovers and make your dog happy and healthy!</p>
+            <div class="d-flex flex-wrap"><a class="btn btn-primary me-2 mb-2 mb-sm-0" href="{% url 'meetups' %}">Find a meetup</a></div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <img class="img-fluid" src="{% static 'img/group_of_dogs.jpg' %}" alt="group of dogs">
+        </div>
+        </div>
+    </div>    
+</section>
+
+
+<!-- Info sections -->
+<section id="about" class="bg-dark text-light p-5">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md p-5">
+                <h2>What is a <span class="text-warning">dog meetup</span>?</h2>
+                <p class="lead">
+                    Our meetups are exactly like any other kind of meetup where you meet people with common interests.<br>
+                    But here it is even better, you bring your dog with you so it can make new friends too!
+                </p>
+                <p>
+                    We created this platform to enable dog owners to meet up at dog parks or any place where dogs are accepted.<br>
+                    Interacting with other dogs has so many benefits!<br>
+                    <ul>
+                        <li>They get more confident which leads to lower risk of aggressivity towards strangers and other dogs</li>
+                        <li>They exercice while playing which keeps their mental and physical health well balanced</li>
+                        <li>They come home relaxed and happy!</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="info" class="p-5">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md p-5">
+                <h2><span class="text-warning">How</span> does it work?</h2>
+                <p class="lead">
+                    <ul>
+                        <li>Create an account or log in if you already have one</li>
+                        <li>Personalize your profile and tell us about your dog(s)</li>
+                        <li>Join a meetup or create your own</li>
+                        <li>Enjoy!</li>
+                    </ul>
+                </p>
+                <p>
+
+                </p>
+                <div class="d-grid gap-2 d-md-block">
+                    <a class="btn btn-primary" href="{% url 'login' %}">Log in</a>
+                    <a class="btn btn-warning" href="{% url 'register' %}">Sign up</a>
+                  </div>
+            </div>
+            <div class="col-md">
+                <img class="img-fluid" src="{% static 'img/dogs_looking.jpg' %}" alt="group of dogs looking down from a wall">
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
