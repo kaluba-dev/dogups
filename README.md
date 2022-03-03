@@ -45,9 +45,8 @@ Install all the packages required (listed in requirements.txt).
 ```bash
 pip install -r requirements.txt
 ```
-Run the migrations in order to create the database.
+Run the migrations.
 ```bash
-python manage.py makemigrations
 python manage.py migrate
 ```
 Create an admin user to manage the website.
